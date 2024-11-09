@@ -10,11 +10,13 @@ app.use(cors());
 
 const STORAGE_PATH = path.join("/ali_PV_dir");
 
+//Test End point to return response to outer container
 app.post("/test-processor", (req, res) => {
 	return res.status(200).json({ message: "processor says hi" });
 });
 
-//modified
+//Modified for demo
+//End point to calculate sum of products
 app.post("/calculate-sum", (req, res) => {
 	const { file, product } = req.body;
 
