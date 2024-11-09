@@ -1,0 +1,35 @@
+steps:
+  # Install dependencies and build using npm
+  - name: "node:14"
+    entrypoint: "npm"
+    args: ["install"]
+    id: "install dependencies"
+
+  # Build and push Docker image.
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-central1-docker.pkg.dev/dalprojects/k8s/processorcontainer:v1",
+        ".",
+      ]
+    id: "build docker image"
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-central1-docker.pkg.dev/dalprojects/k8s/processorcontainer:v1",
+      ]
+    id: "push docker image"
+    #deploy the container to GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - "run"
+      - "--filename=./K8s/"
+      - "--location=us-central1"
+      - "--cluster=cluster-2"
+    id: "deploy new build"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
