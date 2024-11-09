@@ -11,7 +11,7 @@ steps:
       [
         "build",
         "-t",
-        "us-central1-docker.pkg.dev/dalprojects/k8s/processorcontainer:v2",
+        "us-central1-docker.pkg.dev/dalprojects/k8s/processorcontainer:v0",
         ".",
       ]
     id: "build docker image"
@@ -19,7 +19,7 @@ steps:
     args:
       [
         "push",
-        "us-central1-docker.pkg.dev/dalprojects/k8s/processorcontainer:v2",
+        "us-central1-docker.pkg.dev/dalprojects/k8s/processorcontainer:v0",
       ]
     id: "push docker image"
     #deploy the container to GKE
