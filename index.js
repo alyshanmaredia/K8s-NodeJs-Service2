@@ -26,9 +26,13 @@ app.post("/calculate-sum", (req, res) => {
 	if (!fs.existsSync(filePath)) {
 		return res.status(404).json({ file, error: "File not found." });
 	}
-
 	try {
 		const fileContent = fs.readFileSync(filePath, "utf8");
+
+		// Check if the file is in CSV format (simple validation)
+		if (!fileContent.includes(",")) {
+			throw new Error("Input file not in CSV format.");
+		}
 
 		const lines = fileContent.split("\n");
 
@@ -46,10 +50,18 @@ app.post("/calculate-sum", (req, res) => {
 		res.status(200).json({ file, product, sum: total });
 	} catch (error) {
 		console.error("Error processing the file:", error.message);
-		res.status(500).json({
-			file,
-			error: "Input file not in CSV format or unable to process the file.",
-		});
+
+		if (error.message === "Input file not in CSV format.") {
+			res.status(400).json({
+				file,
+				error: "Input file not in CSV format.",
+			});
+		} else {
+			res.status(500).json({
+				file,
+				error: "Unable to process the file.",
+			});
+		}
 	}
 });
 
