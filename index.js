@@ -10,6 +10,10 @@ app.use(cors());
 
 const STORAGE_PATH = path.join("/ali_PV_dir");
 
+app.post("/test-processor", (req, res) => {
+	return res.status(200).json({ message: "processor says hi" });
+});
+
 app.post("/calculate-sum", (req, res) => {
 	const { file, product } = req.body;
 
