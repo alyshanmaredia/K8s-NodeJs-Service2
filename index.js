@@ -64,4 +64,4 @@ app.post("/calculate-sum", (req, res) => {
 	}
 });
 
-app.listen(PORT, () => console.log(`Container 2 running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Container 2 running on port. ${PORT}`));
