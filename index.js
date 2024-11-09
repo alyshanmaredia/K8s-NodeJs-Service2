@@ -29,7 +29,6 @@ app.post("/calculate-sum", (req, res) => {
 	try {
 		const fileContent = fs.readFileSync(filePath, "utf8");
 
-		// Check if the file is in CSV format (simple validation)
 		if (!fileContent.includes(",")) {
 			throw new Error("Input file not in CSV format.");
 		}
