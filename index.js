@@ -30,7 +30,7 @@ app.post("/calculate-sum", (req, res) => {
 	try {
 		const fileContent = fs.readFileSync(filePath, "utf8");
 
-		if (!fileContent.includes(",")) {
+		if (!fileContent.includes(",") || !fileContent.includes("\n")) {
 			throw new Error("Input file not in CSV format.");
 		}
 
